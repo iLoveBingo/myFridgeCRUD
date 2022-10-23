@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 import java.util.List;
 
@@ -16,12 +16,12 @@ public class ProductRepository {
     JdbcTemplate jdbcTemplate;
 
     public List<Product> getAllProducts() {
-        return jdbcTemplate.query("SELECT id, name, weight, insertDate, expiringDate FROM product;",
+        return jdbcTemplate.query("SELECT id, name, weight, insertDate FROM product;",
                 BeanPropertyRowMapper.newInstance(Product.class));
     }
 
     public Product getProductById(int id) {
-        return jdbcTemplate.queryForObject("SELECT id, name, weight, insertDate, expiringDate FROM product WHERE id=?",
+        return jdbcTemplate.queryForObject("SELECT id, name, weight, insertDate FROM product WHERE id=?",
                 BeanPropertyRowMapper.newInstance(Product.class), id);
     }
 
@@ -43,7 +43,4 @@ public class ProductRepository {
         jdbcTemplate.update("DELETE FROM product WHERE id=?", id);
         return true;
     }
-
-
-    ///public void addProduct()
 }

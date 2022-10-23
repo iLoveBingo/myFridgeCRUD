@@ -14,5 +14,4 @@ public class Product {
     private String name;
     private int weight;
     private Date insertDate;
-    private Date expiringDate;
 }
