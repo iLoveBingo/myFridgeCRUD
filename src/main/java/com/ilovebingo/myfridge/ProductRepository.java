@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 
+import java.sql.Date;
 import java.util.List;
 
 
@@ -26,9 +27,10 @@ public class ProductRepository {
     }
 
     public boolean addProducts(List<Product> productList) {
+        Date insertDateGenerated = new Date(System.currentTimeMillis());
         productList.forEach(movie -> jdbcTemplate
-                .update("INSERT INTO product(name,weight) VALUES (?,?);",
-                        movie.getName(), movie.getWeight())
+                .update("INSERT INTO product(name,weight,insertDate) VALUES (?,?,?);",
+                        movie.getName(), movie.getWeight(), insertDateGenerated)
                 );
         return true;
     }
